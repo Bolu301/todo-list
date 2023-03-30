@@ -21,7 +21,7 @@ function addd() {
   cont.classList.add("cont");
 
   const input_task = document.createElement("input");
-  input_task.classList.add("text", "text-break");
+  input_task.classList.add("text");
   input_task.type = "text";
   input_task.value = input_value;
 
