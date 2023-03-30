@@ -1,45 +1,55 @@
-"use strict";
+`use strict`;
 
-const add = document.getElementById("add");
-const input = document.getElementById("inputField");
-const list = document.getElementById("list");
+const inputVal = document.getElementsByClassName("form-control")[0];
 
-add.addEventListener("click", addd);
+const addTaskBtn = document.getElementsByClassName("btn")[0];
 
-input.addEventListener("keypress", function (e) {
-  if (e.key == "Enter") {
-    addd();
+showItem();
+
+addTaskBtn.addEventListener("click", function () {
+  if (inputVal.value.trim() != 0) {
+    let localItems = JSON.parse(localStorage.getItem("localItem"));
+    if (localItems === null) {
+      taskList = [];
+    } else {
+      taskList = localItems;
+    }
+    taskList.push(inputVal.value);
+    localStorage.setItem("localItem", JSON.stringify(taskList));
   }
+
+  showItem();
 });
 
-function addd() {
-  const input_value = input.value;
-  const tasks = document.createElement("div");
-  tasks.classList.add("tasks");
+function showItem() {
+  let localItems = JSON.parse(localStorage.getItem("localItem"));
+  if (localItems === null) {
+    taskList = [];
+  } else {
+    taskList = localItems;
+  }
 
-  const cont = document.createElement("div");
-  cont.classList.add("cont");
-
-  const input_task = document.createElement("input");
-  input_task.classList.add("text");
-  input_task.type = "text";
-  input_task.value = input_value;
-
-  tasks.appendChild(cont);
-  cont.appendChild(input_task);
-
-  const actions = document.createElement("div");
-  actions.classList.add("actions");
-
-  const del = document.createElement("button");
-  del.classList.add("delete", "btn", "btn-danger");
-  del.innerText = "Delete";
-
-  tasks.appendChild(actions);
-  actions.appendChild(del);
-  list.appendChild(tasks);
-
-  del.addEventListener("click", () => {
-    list.removeChild(tasks);
+  let html = "";
+  let itemShow = document.getElementById("list");
+  taskList.forEach((data, index) => {
+    html += `
+      <div class="todoList">
+      <p class="pText">${data}</p>
+      <button class="deleteTask" onClick="deleteItem(${index})">x</button>
+      </div>
+      `;
   });
+  itemShow.innerHTML = html;
+}
+
+function deleteItem(index) {
+  let localItems = JSON.parse(localStorage.getItem("localItem"));
+  taskList.splice(index, 1);
+  localStorage.setItem("localItem", JSON.stringify(taskList));
+  showItem();
+}
+
+function clearTask() {
+  localStorage.clear();
+  showItem();
 }
