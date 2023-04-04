@@ -35,7 +35,7 @@ function showItem() {
     html += `
       <div class="todoList">
       <p class="pText">${data}</p>
-      <button class="deleteTask" onClick="deleteItem(${index})">x</button>
+      <button class="deleteTask" onClick="deleteItem(${index})"><i class="fa-solid fa-trash fa-xs"></i></button>
       </div>
       `;
   });
@@ -46,10 +46,5 @@ function deleteItem(index) {
   let localItems = JSON.parse(localStorage.getItem("localItem"));
   taskList.splice(index, 1);
   localStorage.setItem("localItem", JSON.stringify(taskList));
-  showItem();
-}
-
-function clearTask() {
-  localStorage.clear();
   showItem();
 }
