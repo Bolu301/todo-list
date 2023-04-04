@@ -43,7 +43,12 @@
   flex-wrap: wrap;
 }
 
-.pText:first-letter {
+.pText {
   background: #ffffff;
+  border: none;
+  text-decoration: none;
+}
+
+.pText::first-letter {
   text-transform: capitalize;
 }

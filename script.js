@@ -4,8 +4,6 @@ const inputVal = document.getElementsByClassName("form-control")[0];
 
 const addTaskBtn = document.getElementsByClassName("btn")[0];
 
-showItem();
-
 addTaskBtn.addEventListener("click", function () {
   if (inputVal.value.trim() != 0) {
     let localItems = JSON.parse(localStorage.getItem("localItem"));
@@ -41,13 +39,30 @@ function showItem() {
   taskList.forEach((data, index) => {
     html += `
       <div class="todoList">
-      <p class="pText">${data}</p>
-      <button class="editTask" onClick="editItem(${index})"><i class="fa-solid fa-pen fa-xs"></i></i></button>
-      <button class="deleteTask" onClick="deleteItem(${index})"><i class="fa-solid fa-trash fa-xs"></i></button>
+      <input class = "pText" type="text" value="${data}" readonly>
+      <div>
+        <button class="editTask" onClick="editItem(${index})"><i class="fa-solid fa-pen fa-xs"></i></i></button>
+        <button class="deleteTask" onClick="deleteItem(${index})"><i class="fa-solid fa-trash fa-xs"></i></button>
+      </div>
       </div>
       `;
   });
   itemShow.innerHTML = html;
+}
+showItem();
+
+function editItem(index) {
+  console.log(taskList);
+  let localItems = JSON.parse(localStorage.getItem("localItem"));
+  let input = document.getElementsByClassName("pText")[index];
+  input.removeAttribute("readonly");
+  input.focus();
+  input.addEventListener("blur", (e) => {
+    input.setAttribute("readonly", true);
+    taskList[index] = e.target.value;
+    localStorage.setItem("localItem", JSON.stringify(taskList));
+    showItem();
+  });
 }
 
 function deleteItem(index) {
