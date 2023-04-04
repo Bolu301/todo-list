@@ -52,9 +52,7 @@ function showItem() {
 showItem();
 
 function editItem(index) {
-  console.log(taskList);
-  let localItems = JSON.parse(localStorage.getItem("localItem"));
-  let input = document.getElementsByClassName("pText")[index];
+  const input = document.getElementsByClassName("pText")[index];
   input.removeAttribute("readonly");
   input.focus();
   input.addEventListener("blur", (e) => {
