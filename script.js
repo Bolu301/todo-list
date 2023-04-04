@@ -17,8 +17,15 @@ addTaskBtn.addEventListener("click", function () {
     taskList.push(inputVal.value);
     localStorage.setItem("localItem", JSON.stringify(taskList));
   }
-
+  inputVal.value = ``;
   showItem();
+});
+
+inputVal.addEventListener("keypress", function (event) {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    document.getElementsByClassName("btn")[0].click();
+  }
 });
 
 function showItem() {
@@ -35,6 +42,7 @@ function showItem() {
     html += `
       <div class="todoList">
       <p class="pText">${data}</p>
+      <button class="editTask" onClick="editItem(${index})"><i class="fa-solid fa-pen fa-xs"></i></i></button>
       <button class="deleteTask" onClick="deleteItem(${index})"><i class="fa-solid fa-trash fa-xs"></i></button>
       </div>
       `;
