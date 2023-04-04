@@ -39,7 +39,7 @@ function showItem() {
   taskList.forEach((data, index) => {
     html += `
       <div class="todoList">
-      <input class = "pText" type="text" value="${data}" readonly>
+      <input class = "pText" value = "${data}" readonly>
       <div>
         <button class="editTask" onClick="editItem(${index})"><i class="fa-solid fa-pen fa-xs"></i></i></button>
         <button class="deleteTask" onClick="deleteItem(${index})"><i class="fa-solid fa-trash fa-xs"></i></button>

@@ -41,12 +41,16 @@
   height: fit-content;
   font-weight: bold;
   flex-wrap: wrap;
+  overflow: visible;
 }
 
 .pText {
   background: #ffffff;
   border: none;
+  outline: none;
   text-decoration: none;
+  width: 80%;
+  word-break: normal;
 }
 
 .pText::first-letter {
