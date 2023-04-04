@@ -1,5 +1,12 @@
 `use strict`;
 
+const nameInput = document.querySelector("#name");
+const username = localStorage.getItem("username") || "";
+nameInput.value = username;
+nameInput.addEventListener("change", (e) => {
+  localStorage.setItem("username", e.target.value);
+});
+
 const inputVal = document.getElementsByClassName("form-control")[0];
 
 const addTaskBtn = document.getElementsByClassName("btn")[0];
